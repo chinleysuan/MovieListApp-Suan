@@ -1,39 +1,31 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
-import tailwindcss from '@tailwindcss/vite'
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [
     react(),
+    tailwindcss(),
     VitePWA({
-      registerType: "autoUpdate", // auto update SW
-      includeAssets: ["favicon.ico", "robots.txt", "apple-touch-icon.png"],
+      registerType: 'autoUpdate',
       manifest: {
-        name: "My Progressive Web App",
-        short_name: "MyPWA",
-        description: "A PWA built with Vite + React",
-        theme_color: "#000000",
-        background_color: "#ffffff",
-        display: "standalone",
-        start_url: ".",
+        name: 'My Progressive Web App',
+        short_name: 'MyPWA',
+        start_url: '/',
+        display: 'standalone',
+        background_color: '#ffffff',
+        theme_color: '#000000',
         icons: [
-          { src: "logo192.png", sizes: "192x192", type: "image/png" },
-          { src: "logo512.png", sizes: "512x512", type: "image/png" }
-        ]
-      },
-      workbox: {
-        runtimeCaching: [
           {
-            urlPattern: ({ request }) => request.destination === "document",
-            handler: "NetworkFirst",
-            options: { cacheName: "html-cache" }
+            src: '/logo192.png',
+            sizes: '192x192',
+            type: 'image/png'
           },
           {
-            urlPattern: ({ request }) =>
-              request.destination === "image" || request.destination === "script" || request.destination === "style",
-            handler: "CacheFirst",
-            options: { cacheName: "asset-cache", expiration: { maxEntries: 200, maxAgeSeconds: 60 * 60 * 24 * 30 } }
+            src: '/logo512.png',
+            sizes: '512x512',
+            type: 'image/png'
           }
         ]
       }

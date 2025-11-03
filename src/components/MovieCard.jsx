@@ -1,22 +1,17 @@
 function MovieCard({ movie, onSelectMovie }) {
   const openTrailer = (e) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     const query = encodeURIComponent(`${movie.Title} trailer site:youtube.com`);
-    const googleSearchUrl = `https://www.google.com/search?q=${query}`;
-    window.open(googleSearchUrl, "_blank");
+    window.open(`https://www.google.com/search?q=${query}`, "_blank");
   };
 
   return (
     <div
-      onClick={() => onMovieClick(movie)}
+      onClick={() => onSelectMovie(movie)}
       className="bg-white shadow rounded-lg p-3 text-center transition-transform transform hover:scale-105 cursor-pointer"
     >
       <img
-        src={
-          movie.Poster !== "N/A"
-            ? movie.Poster
-            : "https://via.placeholder.com/150"
-        }
+        src={movie.Poster && movie.Poster !== "N/A" ? movie.Poster : "/images/fallback.jpg"}
         alt={movie.Title}
         className="w-full h-64 object-cover rounded-md"
       />
